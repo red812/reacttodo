@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 
 function NewTodo({ handleTodo }) {
-  const [newTodo, setNewTodo] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
 
-  //   const updateTodo = (e) => {};
+  // const update = (e) => {
+  //   let temp = {};
+  //   temp.text = e.target.value;
+  //   temp.completed = false;
+  //   setNewTodo(temp);
+  // };
 
   return (
     <>
@@ -11,14 +16,23 @@ function NewTodo({ handleTodo }) {
         type="text"
         name="newtodo"
         id=""
-        autoComplete="no"
-        onBlur={(e) => setNewTodo(e.target.value)}
+        autoComplete="off"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button className="btn" type="submit" onClick={() => handleTodo(newTodo)}>
+      <button
+        className="btn"
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          handleTodo(newTodo);
+          setNewTodo("");
+        }}
+      >
         Add
       </button>
     </>
-
+  );
 }
 
 export default NewTodo;

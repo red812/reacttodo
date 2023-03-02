@@ -6,10 +6,20 @@ function TodoList() {
   const [todos, setTodos] = useState([{ completed: false, text: "hello" }]);
 
   const handlenewtodo = (newtodo) => {
-    setTodos(newtodo);
+    // newtodo.completed = false;
+    console.log(newtodo);
+    setTodos((todos) => [...todos, { completed: false, text: newtodo }]);
+    console.log(todos);
   };
 
-  const handlechecked = () => {};
+  const handlechecked = (e, ele) => {
+    // console.log(e.target.checked, ele);
+    const updatedtos = todos.map((todo) =>
+      todo.text === ele.text ? { ...todo, completed: e.target.checked } : todo
+    );
+    setTodos(updatedtos);
+    // console.log(todos);
+  };
 
   //   const todolist = todos.map((todo) => console.log(todo));
 
@@ -24,10 +34,10 @@ function TodoList() {
                 <div>
                   <input
                     type="checkbox"
-                    value={ele.completed}
+                    checked={ele.completed}
                     name=""
                     id="check"
-                    onChange={handlechecked}
+                    onChange={(e) => handlechecked(e, ele)}
                   />
                   <label htmlFor="">{ele.text}</label>
                 </div>
